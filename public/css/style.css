@@ -218,17 +218,8 @@ img{
   }
   
   .article_ul li:hover {
-    filter: none;
+    border-bottom: 1px solid var(--black);
   }
-  
-  .article_ul:hover li {
-    filter: blur(3px);
-  }
-  
-  .article_ul:hover li:hover {
-    filter: none;
-  }
-  
   
   .article {
     white-space: pre-wrap;

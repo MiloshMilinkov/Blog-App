@@ -3,16 +3,29 @@ import Post from '../Models/Post.js'
 
 const router = Router();
 
-router.get('/', (req, res) => {
-  const locals = {
-    title: "NodeJs Blog",
-    description: "Simpleblog created with code...."
+router.get('/', async (req, res) => {
+  try{
+    const locals = {
+      title: "NodeJs Blog",
+      description: "Simpleblog created with code...."
+    }
+
+    let perPage = 5;
+    let page = req.query.page || 1;
+
+    const posts = await Post.aggregate([
+      {$sort: {createdAt: -1}}
+    ]).skip(perPage * page - perPage).limit(perPage).exec();
+
+    const count = await Post.countDocuments();
+    const nextPage = parseInt(page) + 1;
+    const hasNextPage = nextPage <= Math.ceil(count / perPage);
+
+    res.render('index', {locals, posts, current: page, nextPage: hasNextPage ? nextPage : null});
+  }catch(error){
+    console.log(error);
   }
-  res.render('index', {locals});
 });
-
-
-// 
 
 router.get('/api/about', (req, res) => {
   res.render('about');
