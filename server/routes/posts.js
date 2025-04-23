@@ -1,75 +1,56 @@
+
 import { Router } from 'express';
-import Post from '../Models/Post.js'
+import * as postsController from '../controllers/postsController.js';
 
 const router = Router();
 
-router.get('/', async (req, res) => {
-  try{
-    const locals = {
-      title: "NodeJs Blog",
-      description: "Simpleblog created with code...."
-    }
+router.get('/', postsController.listPosts);
 
-    let perPage = 5;
-    let page = req.query.page || 1;
-
-    const posts = await Post.aggregate([
-      {$sort: {createdAt: -1}}
-    ]).skip(perPage * page - perPage).limit(perPage).exec();
-
-    const count = await Post.countDocuments();
-    const nextPage = parseInt(page) + 1;
-    const hasNextPage = nextPage <= Math.ceil(count / perPage);
-
-    res.render('index', {locals, posts, current: page, nextPage: hasNextPage ? nextPage : null});
-  }catch(error){
-    console.log(error);
-  }
-});
-
-router.get('/post/:id', async (req, res) => {
-  try {
-    const locals = {
-      title: "NodeJs Blog",
-      description: "Simpleblog created with code...."
-    }
-
-    let postId = req.params.id;
-    const post = await Post.findById({_id: postId})
-
-    res.render('post', {locals, post});
-  } catch (error) {
-    
-  }
-
-});
-
-
-
-router.post('/search', async (req, res) => {
-  try {
-    const locals = {
-      title: "Search",
-      description: "Simpleblog created with code...."
-    }
-    let searchTemr = req.body.searchTerm;
-
-    res.render('search', {locals, post});
-  } catch (error) {
-    
-  }
-
-});
-
-
-
-router.get('/about', (req, res) => {
-  res.render('about');
-});
+router.get('/:id', postsController.findPostById);
 
 export default router;
 
 
+
+// router.get('/post/:id', async (req, res) => {
+//   try {
+//     const locals = {
+//       title: "NodeJs Blog",
+//       description: "Simpleblog created with code...."
+//     }
+
+//     let postId = req.params.id;
+//     const post = await Post.findById({_id: postId})
+
+//     res.render('post', {locals, post});
+//   } catch (error) {
+    
+//   }
+
+// });
+
+
+
+// router.post('/search', async (req, res) => {
+//   try {
+//     const locals = {
+//       title: "Search",
+//       description: "Simpleblog created with code...."
+//     }
+//     let searchTemr = req.body.searchTerm;
+
+//     res.render('search', {locals, post});
+//   } catch (error) {
+    
+//   }
+
+// });
+
+
+
+// router.get('/about', (req, res) => {
+//   res.render('about');
+// });
 
 
 //function insertPostData () {
