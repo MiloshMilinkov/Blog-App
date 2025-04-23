@@ -27,7 +27,43 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.get('/api/about', (req, res) => {
+router.get('/post/:id', async (req, res) => {
+  try {
+    const locals = {
+      title: "NodeJs Blog",
+      description: "Simpleblog created with code...."
+    }
+
+    let postId = req.params.id;
+    const post = await Post.findById({_id: postId})
+
+    res.render('post', {locals, post});
+  } catch (error) {
+    
+  }
+
+});
+
+
+
+router.post('/search', async (req, res) => {
+  try {
+    const locals = {
+      title: "Search",
+      description: "Simpleblog created with code...."
+    }
+    let searchTemr = req.body.searchTerm;
+
+    res.render('search', {locals, post});
+  } catch (error) {
+    
+  }
+
+});
+
+
+
+router.get('/about', (req, res) => {
   res.render('about');
 });
 
