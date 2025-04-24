@@ -48,5 +48,25 @@ export async function deletePostById(req, res) {
   } catch (error) {
     res.status(500).json({ error: 'Could not delete post.' });
   }
+}
+
+export async function patchPostbyId(req, res) {
+  try {
+    const {id} = req.params;
+    const {title, body} = req.body;
+    const updatedPost  = await Post.findByIdAndUpdate(
+      {_id: id},
+      { title, body, updatedAt: Date.now()},
+      { 
+        new: true,
+        runValidators: true 
+      }
+    )
+    if (!updatedPost ) return res.status(404).json({ error: 'Post not found.' });
+    res.status(200).json(updatedPost);
+    
+  } catch (error) {
+    
+  }
   
 }
