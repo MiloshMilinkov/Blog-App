@@ -8,6 +8,8 @@ router.get('/', postsController.listPosts);
 
 router.get('/:id', postsController.findPostById);
 
+router.post('/', postsController.createPost);
+
 export default router;
 
 

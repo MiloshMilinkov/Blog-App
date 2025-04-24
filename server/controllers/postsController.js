@@ -22,3 +22,18 @@ export async function findPostById(req, res, next) {
     next(err);
   }
 }
+
+export async function createPost(req, res) {
+  try {
+    const{title, body} = req.body;
+    const post = await Post.create({
+      title,
+      body
+    })
+    res.status(201).json(post);
+
+  } catch (error) {
+    res.status(400).json({error: 'Invalid post data.'})
+  }
+  
+}
