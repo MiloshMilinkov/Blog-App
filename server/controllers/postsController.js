@@ -1,6 +1,5 @@
 import Post from '../models/Post.js';
 
-
 export async function listPosts(req, res, next) {
   try {
     const posts = await Post.find().sort('-createdAt');
@@ -13,7 +12,7 @@ export async function listPosts(req, res, next) {
 
 export async function findPostById(req, res, next) {
   try {
-    const post = await Post.findById(req.params.id);
+    const post = await Post.findById(req.params.id).lean();
     if (!post) {
       return res.status(404).json({ error: 'Post not found.' });
     }
@@ -61,12 +60,12 @@ export async function patchPostbyId(req, res) {
         new: true,
         runValidators: true 
       }
-    )
+    ).lean()
     if (!updatedPost ) return res.status(404).json({ error: 'Post not found.' });
     res.status(200).json(updatedPost);
     
   } catch (error) {
-    
+    res.status(500).json({ error: 'Could not patch post.' });
   }
   
 }
