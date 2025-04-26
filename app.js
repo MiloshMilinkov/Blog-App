@@ -1,6 +1,5 @@
 import dotenv from 'dotenv';
 import express from 'express';
-import expressEjsLayouts from 'express-ejs-layouts';
 import router from './server/routes/index.js';
 import connectDb from './server/config/db.js';
 
