@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 //password hashing
 import bcrypt from 'bcrypt';
 
-const userchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
     username:{
         type: String,
         required: true
@@ -23,7 +23,7 @@ const userchema = new mongoose.Schema({
 timestamps: true
 })
 
-userchema.pre('save', async function (next){
+userSchema.pre('save', async function (next){
 
     if(!this.isModified('passwordHash')){
         return next();
@@ -34,5 +34,8 @@ userchema.pre('save', async function (next){
     next();
 });
 
+userSchema.methods.verifyPassword = function (password){
+    return bcrypt.compare(password, this.passwordHash);
+}
 
-export default mongoose.models.User || mongoose.model('User', userchema);
+export default mongoose.models.User || mongoose.model('User', userSchema);
