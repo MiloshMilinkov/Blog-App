@@ -50,5 +50,6 @@ This application enables users to:
  ├─ /models          # Mongoose schemas (User, Post)
  ├─ /routes          # Express routers (auth.js, posts.js)
  ├─ /middleware      ???
+ ├─ /validators      # Data valdiation
  ├─ /config          # DB
  └─ app.js        # Entry point (Express setup)
