@@ -13,6 +13,11 @@ export async function register(req, res) {
 
         res.status(201).json({message: 'New user created.'})
     } catch (error) {
+        if (error.code === 11000) {
+            return res
+              .status(409)
+              .json({ message: 'That email is already registered.' });
+          }
         res.status(500).json({message: 'Failed user register request.'})
     }
 }
