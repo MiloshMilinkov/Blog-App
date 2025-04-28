@@ -24,10 +24,11 @@ export async function findPostById(req, res, next) {
 
 export async function createPost(req, res) {
   try {
-    const{title, body} = req.body;
+    const{title, body, author} = req.body;
     const post = await Post.create({
       title,
-      body
+      body,
+      author
     })
     res.status(201).json(post);
   } catch (error) {
