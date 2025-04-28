@@ -1,18 +1,18 @@
 import Post from '../models/Post.js';
+import * as postService from '../Services/postsService.js'
 
-export async function listPosts(req, res, next) {
+export const listPosts = async (req, res, next) =>{
   try {
-    const posts = await Post.find().sort('-createdAt');
+    const posts = await postService.getAllPosts();
     res.status(200).json(posts);
   } catch (err) {
-    console.log("grska")   
     next(err);
   }
 }
 
-export async function findPostById(req, res, next) {
+export const findPostById = async (req, res, next) =>{
   try {
-    const post = await Post.findById(req.params.id).lean();
+    const post = await postService.getPostById(req.params.id);
     if (!post) {
       return res.status(404).json({ error: 'Post not found.' });
     }
@@ -24,24 +24,17 @@ export async function findPostById(req, res, next) {
 
 export async function createPost(req, res) {
   try {
-    const{title, body, author} = req.body;
-    const post = await Post.create({
-      title,
-      body,
-      author
-    })
+    const post = await postService.createPost(req.body)
     res.status(201).json(post);
   } catch (error) {
     res.status(400).json({error: 'Invalid post data.'})
   }
 }
 
-export async function deletePostById(req, res) {
+export const deletePostById = async (req, res) => {
   try {
-    const {id} = req.params;
-    const deletePost = await Post.deleteOne({
-      _id: id
-    })
+    const deletePost = await postService.deletePostById(req.params.id)
+    
     if(deletePost.deletedCount === 0){ return res.status(404).json({error: 'Post not found.'})}
     res.json({message: 'Post deleted.'})
 
@@ -50,18 +43,9 @@ export async function deletePostById(req, res) {
   }
 }
 
-export async function patchPostbyId(req, res) {
+export const patchPostbyId = async (req, res) => {
   try {
-    const {id} = req.params;
-    const {title, body} = req.body;
-    const updatedPost  = await Post.findByIdAndUpdate(
-      {_id: id},
-      { title, body, updatedAt: Date.now()},
-      { 
-        new: true,
-        runValidators: true 
-      }
-    ).lean()
+    const updatedPost = await postService.patchPostById(req.params.id, req.body) 
     if (!updatedPost ) return res.status(404).json({ error: 'Post not found.' });
     res.status(200).json(updatedPost);
     

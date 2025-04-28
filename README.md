@@ -49,6 +49,7 @@ This application enables users to:
  ├─ /controllers     # Request handlers for auth & posts
  ├─ /models          # Mongoose schemas (User, Post)
  ├─ /routes          # Express routers (auth.js, posts.js)
+ ├─ /services        # Bis and DB logic
  ├─ /middleware      ???
  ├─ /validators      # Data valdiation
  ├─ /config          # DB
