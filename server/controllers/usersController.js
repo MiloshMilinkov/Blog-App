@@ -1,4 +1,5 @@
 import User from '../Models/User.js';
+import jwt from 'jsonwebtoken';
 
 export async function register(req, res) {
     try {
@@ -22,6 +23,7 @@ export async function register(req, res) {
     }
 }
 
+//Never worked with JWT so will add comment for future self
 export async function login(req, res) {
     try {
         const {email, password} = req.body;
@@ -33,8 +35,15 @@ export async function login(req, res) {
             return res.status(401).json({message: 'Invalid email or password.'})
         }
         
-        res.status(200).json({message: "Logged In."})
+        //sign a Token that "hashes the whole data set of the user upon login, provides a key that can confirm this token and sets an expiration date."
+        //have to use {} to create a json from the object
+        const token = jwt.sign({user}, process.env.MY_SECRET, {expiresIn: "15m"});
+
+        //Adds the token to the res cookies
+        res.cookie("token", token,{ httpOnly: true})
+        .status(200)
+        .json({message: "Logged In."})
     } catch (error) {
-        res.status(500).json({message: 'Failed user login request.'})
+        res.status(500).json({message: 'Failed user login request.' + error})
     }
 }
