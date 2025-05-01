@@ -3,6 +3,7 @@ import express from 'express';
 import router from './server/routes/index.js';
 import connectDb from './server/config/db.js';
 import cookieParser from 'cookie-parser';
+import cors from 'cors'
 
 dotenv.config();
 
@@ -15,6 +16,14 @@ connectDb()
 
 const app = express();
 
+//Allow only my future fontend origin to make request to this api
+//Will need to check this more, but without cors only the same origin url can make the request
+//Front will def be on a diffrenet origin, check when deploying to real env.
+app.use(cors({
+  origin: 'http://localhost:3000',
+  methods: ['GET', 'POST', 'PATCH', 'DELETE'],
+  credentials: true
+}))
 
 app.use(express.static('public'));
 app.use(express.json());
