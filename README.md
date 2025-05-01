@@ -33,6 +33,7 @@ This application enables users to:
   - Express  
   - MongoDB  
   - Mongoose ODM  
+  - ioReddis
 - **Frontend**  
   - Vue.js 3  
   - Vite  
@@ -50,7 +51,7 @@ This application enables users to:
  ├─ /models          # Mongoose schemas (User, Post)
  ├─ /routes          # Express routers (auth.js, posts.js)
  ├─ /services        # Bis and DB logic
- ├─ /middleware      ???
- ├─ /validators      # Data valdiation
- ├─ /config          # DB
- └─ app.js        # Entry point (Express setup)
+ ├─ /middleware      # authenticateUser (JWT), limiter (rate limtier) 
+ ├─ /validators      # Data validation
+ ├─ /config          # DB,ioRedis
+ └─ app.js           # Entry point (Express setup)

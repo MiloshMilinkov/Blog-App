@@ -4,6 +4,8 @@ import router from './server/routes/index.js';
 import connectDb from './server/config/db.js';
 import cookieParser from 'cookie-parser';
 import cors from 'cors'
+import tokenBucketMiddleware from './server/middleware/limiter.js';
+
 
 dotenv.config();
 
@@ -30,7 +32,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser())
 
-app.use('/api', router);
+
+app.use('/api', tokenBucketMiddleware, router);
 
 app.use((err, req, res, next) => {
   console.error(err.stack);
