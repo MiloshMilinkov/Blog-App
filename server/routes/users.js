@@ -5,7 +5,7 @@ import { userRules, validateUser } from '../validators/usersValidator.js';
 
 const router = Router();
 
-router.post('/register', userRules, validateUser, usersController.register);
-router.post('/login', usersController.login);
+router.post('/register', userRules, validateUser, usersController.registerUser);
+router.post('/login', usersController.loginUser);
 
 export default router;

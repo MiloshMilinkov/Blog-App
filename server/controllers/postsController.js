@@ -1,4 +1,3 @@
-import Post from '../models/Post.js';
 import * as postService from '../Services/postsService.js'
 
 export const listPosts = async (req, res, next) =>{

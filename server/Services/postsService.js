@@ -1,4 +1,4 @@
-import Post from "../models/Post.js";
+import Post from "../Models/Post.js";
 
 export const getAllPosts = () => {
     return Post.find().sort('-createdAt').lean();
