@@ -1,12 +1,8 @@
 import User from "../Models/User.js";
-
+import jwt from 'jsonwebtoken';
 
 export const registerUser = async ({ username, email, password }) => {
-    const newUser = new User({
-      username,
-      email,
-      passwordHash: password 
-    });
+    const newUser = new User({username, email, passwordHash: password});
   
     try {
       return await newUser.save();
@@ -20,7 +16,7 @@ export const registerUser = async ({ username, email, password }) => {
     }
 }
 
-export async function loginUser({ email, password }) {
+export const  loginUser = async ({ email, password }) => {
     const user = await User.findOne({ email });
     if (!user || !(await user.verifyPassword(password))) {
       const err = new Error('Invalid email or password.');
@@ -29,4 +25,12 @@ export async function loginUser({ email, password }) {
     }
     
     return user;
+  }
+
+//Never worked with JWT so will add comment for future self
+export const createTokenForUser = (user) => {
+    // Only include minimal data in the JWT payload:
+    //sign a Token that "hashes the whole data set of the user upon login, provides a key that can confirm this token and sets an expiration date."
+    const payload = { sub: user._id.toString(), email: user.email };
+    return jwt.sign(payload, process.env.MY_SECRET, { expiresIn: '15m' });
   }
