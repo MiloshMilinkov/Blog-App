@@ -30,7 +30,13 @@ export const patchPostById = async (id, data) => {
 }
 
 export const deletePostById = async (id) => {
-    return await Post.deleteOne({
-      _id: id
-    })
+  const deleted = await Post.deleteOne({
+    _id: id
+  });
+  
+  if(deleted.deletedCount === 0){       
+    const err = new Error('Post not found.');
+    err.status = 404; 
+    throw err;
+  }
 }

@@ -23,7 +23,6 @@ export const  loginUser = async ({ email, password }) => {
       err.status = 401; 
       throw err;
     }
-    
     return user;
   }
 

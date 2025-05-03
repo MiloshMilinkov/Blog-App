@@ -32,11 +32,8 @@ export async function createPost(req, res) {
 
 export const deletePostById = async (req, res) => {
   try {
-    const deletePost = await postService.deletePostById(req.params.id)
-    
-    if(deletePost.deletedCount === 0){ return res.status(404).json({error: 'Post not found.'})}
+    await postService.deletePostById(req.params.id)
     res.json({message: 'Post deleted.'})
-
   } catch (error) {
     res.status(500).json({ error: 'Could not delete post.' });
   }
