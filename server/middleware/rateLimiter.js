@@ -6,7 +6,7 @@ const tokenBucket = new RateLimiterRedis({
   storeClient: redisClient,
   keyPrefix: 'limitKeyPrefix',
   points: 100,
-  duration: 15 * 60 * 1000 
+  duration: 15 * 60
 });
 
 export const tokenBucketMiddleware = (req, res, next) => {
