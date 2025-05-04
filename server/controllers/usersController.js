@@ -32,3 +32,11 @@ export async function loginUser(req, res) {
         res.status(500).json({message: 'Failed user login request.' + error})
     }
 }
+
+
+export async function logoutUser(req,res) {
+  res.clearCookie('token', {
+    httpOnly: true,
+  }).status(200).json({message: 'Logged out successfully'})
+  
+}
