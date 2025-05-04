@@ -1,8 +1,10 @@
 import Post from "../Models/Post.js";
 
 export const getAllPosts = () => {
-    return Post.find().sort('-createdAt').lean();
-}
+  return Post.find(
+      { author: { $exists: true, $ne: null } },
+    ).sort('-createdAt').populate('author', 'username');
+};
 
 export  const  getPostById = async (id) => {
    return await Post.findById(id).lean();

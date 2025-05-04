@@ -14,6 +14,11 @@ const postSchema = new Schema({
     timestamps:true
 })
 
+postSchema.set('toJSON', {
+    virtuals: true,
+    versionKey: false,
+    transform: (_doc, ret) => { delete ret._id; }
+  });
 
 const Post = mongoose.models.Post || mongoose.model('Post', postSchema);
 
