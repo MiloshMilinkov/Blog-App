@@ -8,6 +8,7 @@
         :createdAt="post.createdAt"
         :updatedAt="post.updatedAt"
         :author="post.author"
+        @delete="deletePost"
         >
         </Post>
     </ul>
@@ -24,6 +25,15 @@ onMounted(async () => {
 const res = await api.get('/posts');
 posts.value = res.data;
 });
+
+async function deletePost(id) {
+  try {
+    await api.delete(`/posts/${id}`);
+    posts.value = posts.value.filter(p => p.id !== id);
+  } catch (e) {
+    console.error('Failed to delete', e);
+  }
+}
 </script>
 
 <style scoped>

@@ -6,6 +6,9 @@
             <p v-if="author">Author: {{ author.username }}</p>
             <p>Created at: {{ formattedCreatedAt }}</p>
             <p>Last edited at: {{ formattedUpdatedAt }}</p>
+            <div>
+                <BaseButton  @click="onDelete(postId)">Delete</BaseButton>
+            </div>
         </BaseCard>
     </li>
 </template>
@@ -13,8 +16,10 @@
 <script setup>
 import { computed } from 'vue';
 import BaseCard from '../UI/BaseCard.vue';
+import BaseButton from '../UI/BaseButton.vue';
 import moment from 'moment'
-const { title, body, author, createdAt, updatedAt } = defineProps({
+
+const { postId, title, body, author, createdAt, updatedAt } = defineProps({
     postId: { type: String, required: true },
     title: { type: String, required: true },
     body: { type: String, required: true },
@@ -30,6 +35,12 @@ const formattedCreatedAt = computed(() =>
 const formattedUpdatedAt = computed(() =>
     moment(updatedAt).format('YYYY-MM-DD')
 );
+
+const emit = defineEmits(['delete']);
+function onDelete(){
+    emit('delete', postId);
+}
+
 </script>
 
 <style scoped>
