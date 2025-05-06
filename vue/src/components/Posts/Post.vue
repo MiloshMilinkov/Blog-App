@@ -1,11 +1,13 @@
 <template>
     <li>
         <BaseCard>
-            <header><h3>{{ title }}</h3></header>
-            <p>{{ body }}</p>
-            <p v-if="author">Author: {{ author.username }}</p>
-            <p>Created at: {{ formattedCreatedAt }}</p>
-            <p>Last edited at: {{ formattedUpdatedAt }}</p>
+            <router-link :to="{name: 'PostDetail', params: {id: postId}}" class="link">
+                <header><h3>{{ title }}</h3></header>
+                <p>{{ body }}</p>
+                <p v-if="author">Author: {{ author.username }}</p>
+                <p>Created: {{ dateFormat(createdAt) }}</p>
+                <p>Updated: {{ dateFormat(updatedAt) }}</p>
+            </router-link>
             <div>
                 <BaseButton  @click="onDelete(postId)">Delete</BaseButton>
             </div>
@@ -18,6 +20,7 @@ import { computed } from 'vue';
 import BaseCard from '../UI/BaseCard.vue';
 import BaseButton from '../UI/BaseButton.vue';
 import moment from 'moment'
+import dateFormat from '../../helper/dateFormat.js'
 
 const { postId, title, body, author, createdAt, updatedAt } = defineProps({
     postId: { type: String, required: true },
@@ -27,14 +30,6 @@ const { postId, title, body, author, createdAt, updatedAt } = defineProps({
     createdAt: { type: String, required: true },
     updatedAt: { type: String, required: true }
 });
-
-const formattedCreatedAt = computed(() =>
-    moment(createdAt).format('YYYY-MM-DD')
-);
-
-const formattedUpdatedAt = computed(() =>
-    moment(updatedAt).format('YYYY-MM-DD')
-);
 
 const emit = defineEmits(['delete']);
 function onDelete(){
@@ -62,6 +57,10 @@ h3 {
 
 p {
     margin: 0.5rem 0;
+}
+
+.link{
+    text-decoration: none;
 }
 
 </style>
