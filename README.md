@@ -46,12 +46,16 @@ This application enables users to:
 ---
 
 ## Backend Architecture
-/server
- ├─ /controllers     # Request handlers for auth & posts
- ├─ /models          # Mongoose schemas (User, Post)
- ├─ /routes          # Express routers (auth.js, posts.js)
- ├─ /services        # Bis and DB logic
- ├─ /middleware      # authenticateUser (JWT), limiter (rate limtier) 
- ├─ /validators      # Data validation
- ├─ /config          # DB,ioRedis
- └─ app.js           # Entry point (Express setup)
+- **Server**  
+ - controllers     # Request handlers for auth & posts
+ - models          # Mongoose schemas (User, Post)
+ - routes          # Express routers (auth.js, posts.js)
+ - services        # Bis and DB logic
+ - middleware      # authenticateUser (JWT), limiter (rate limtier) 
+ - validators      # Data validation
+ - config          # DB,ioRedis
+ - app.js          # Entry point (Express setup)
+
+ ---
+
+## Frontend Architecture
