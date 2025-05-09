@@ -14,6 +14,6 @@ router.post('/', authenticate.authenticate, postRules, validatePost, postsContro
 
 router.delete('/:id', postsController.deletePostById);
 
-router.patch('/:id', authenticate.authenticate, postRules, validatePost, postsController.patchPostbyId);
-
+//router.patch('/:id', authenticate.authenticate, postRules, validatePost, postsController.patchPostbyId);
+router.patch('/:id', postRules, validatePost, postsController.patchPostbyId);
 export default router;

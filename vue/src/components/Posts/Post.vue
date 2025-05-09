@@ -10,6 +10,9 @@
             </router-link>
             <div>
                 <BaseButton  @click="onDelete(postId)">Delete</BaseButton>
+                <router-link :to="{name: 'EditPost', params: {id: postId}}" class="link">
+                    Edit
+                </router-link>
             </div>
         </BaseCard>
     </li>
@@ -31,7 +34,7 @@ const { postId, title, body, author, createdAt, updatedAt } = defineProps({
     updatedAt: { type: String, required: true }
 });
 
-const emit = defineEmits(['delete']);
+const emit = defineEmits(['delete', 'edit']);
 function onDelete(){
     emit('delete', postId);
 }
