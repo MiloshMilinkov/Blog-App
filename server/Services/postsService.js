@@ -7,7 +7,7 @@ export const getAllPosts = () => {
 };
 
 export  const  getPostById = async (id) => {
-   return await Post.findById(id).lean();
+   return await Post.findById(id).populate('author', 'username').lean();
 }
 
 export  const  createPost = async (data) => {
