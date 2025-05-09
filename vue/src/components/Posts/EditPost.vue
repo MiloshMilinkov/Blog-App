@@ -9,7 +9,7 @@
       <header>
         <h2>Edit Post</h2>
       </header>
-      <div class="mb-4">
+      <div class="title_container">
         <label for="title">Title</label>
         <input
         id="title"
@@ -19,7 +19,7 @@
         />
       </div>
 
-      <div class="mb-4">
+      <div class="body_container">
         <label for="body">Body</label>
         <textarea
         id="body"
@@ -56,10 +56,9 @@
   const post    = ref(null);
   const isLoaded = ref(false);
   const errorMessages = ref([]);
-
   const form = reactive({
     title: '',
-    body: ''
+    body: '',
   });
   
   onMounted(async () => {
@@ -69,6 +68,7 @@
     
       form.title = post.value.title;
       form.body  = post.value.body;
+
       isLoaded.value = true;
     } catch (err) {
       console.error('Failed to fetch post:', err);
@@ -94,11 +94,58 @@
   }
 }
   
-  function goBack() {
-    router.back(); 
-  }
-  </script>
+function goBack() {
+  router.back(); 
+}
+</script>
   
-  <style scoped>
-  </style>
+<style scoped>
+.title_container{
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+.title_container input{
+  border: 1px solid #ccc;
+  border-radius: 5%;
+}
+
+.body_container{
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+textarea{
+    display: block;
+    width: 100%;
+    font: inherit;
+    padding: 0.15rem;
+    border: 1px solid #ccc;
+}
+
+label{
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+input,
+textarea{
+    display: block;
+    width: 100%;
+    font: inherit;
+    padding: 0.15rem;
+    border: 1px solid #ccc;
+}
+
+input:focus,
+textarea:focus{
+    outline: none;
+    background-color: #eceaea;
+}
+.form-control{
+    margin: 1rem 0;
+}
+</style>
   

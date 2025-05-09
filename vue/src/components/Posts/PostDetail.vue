@@ -13,7 +13,6 @@
 <script setup>
   import { ref, onMounted } from 'vue';
   import { useRoute, useRouter } from 'vue-router';
-  import moment from 'moment';
   import BaseCard from '../UI/BaseCard.vue';
   import BaseButton from '../UI/BaseButton.vue';
   import api from '../../api/index.js';
