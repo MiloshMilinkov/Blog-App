@@ -8,11 +8,9 @@
                 <p>Created: {{ dateFormat(createdAt) }}</p>
                 <p>Updated: {{ dateFormat(updatedAt) }}</p>
             </router-link>
-            <div>
-                <BaseButton  @click="onDelete(postId)">Delete</BaseButton>
-                <router-link :to="{name: 'EditPost', params: {id: postId}}" class="link">
-                    Edit
-                </router-link>
+            <div class="btn-container">
+              <BaseButton  @click="onDelete(postId)">Delete</BaseButton>
+              <BaseButton @click="$router.push({ name: 'EditPost', params: { id: postId } })">Edit</BaseButton>
             </div>
         </BaseCard>
     </li>
@@ -43,27 +41,51 @@ function onDelete(){
 
 <style scoped>
 li {
-    margin: auto;
-    max-width: 40rem;
+  margin: auto;
+  max-width: 40rem;
+  margin-bottom: 2rem;
 }
 
 header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 0.5rem;
 }
 
 h3 {
-    font-size: 1.25rem;
-    margin: 0.5rem 0;
+  font-size: 1.5rem;
+  color: var(--color-accent-dark);
+  margin: 0;
 }
 
 p {
-    margin: 0.5rem 0;
+  margin: 0.5rem 0;
+  color: var(--color-text);
 }
 
-.link{
-    text-decoration: none;
+.link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  padding: 1rem 0;
 }
 
+.link:hover {
+  background-color: #f8f6f4;
+  border-radius: 8px;
+  transition: background 0.3s;
+}
+
+.btn-container{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.btn-container button{
+  width: 10rem;
+}
 </style>

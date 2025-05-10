@@ -36,3 +36,20 @@
   }
   </script>
   
+<style scoped>
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--color-accent);
+  }
+
+  p {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    color: var(--color-text);
+  }
+
+  .BaseButton {
+    margin-top: 1rem;
+  }
+</style>

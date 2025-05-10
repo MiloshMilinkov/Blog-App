@@ -100,52 +100,46 @@ function goBack() {
 </script>
   
 <style scoped>
-.title_container{
+form {
   display: flex;
   flex-direction: column;
-  width: 50%;
+  gap: 1.5rem;
 }
 
-.title_container input{
-  border: 1px solid #ccc;
-  border-radius: 5%;
-}
-
-.body_container{
+.title_container,
+.body_container,
+.mb-4 {
   display: flex;
   flex-direction: column;
-  width: 50%;
-}
-
-textarea{
-    display: block;
-    width: 100%;
-    font: inherit;
-    padding: 0.15rem;
-    border: 1px solid #ccc;
-}
-
-label{
-    font-weight: bold;
-    margin-bottom: 0.5rem;
+  gap: 0.5rem;
 }
 
 input,
-textarea{
-    display: block;
-    width: 100%;
-    font: inherit;
-    padding: 0.15rem;
-    border: 1px solid #ccc;
+textarea {
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 0.75rem;
+  font-size: 1rem;
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  transition: background-color 0.2s;
 }
 
 input:focus,
-textarea:focus{
-    outline: none;
-    background-color: #eceaea;
+textarea:focus {
+  background-color: #eceaea;
+  outline: none;
 }
-.form-control{
-    margin: 1rem 0;
+
+label {
+  font-weight: 600;
+  color: var(--color-muted);
+}
+
+form > div:last-child {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
 }
 </style>
   

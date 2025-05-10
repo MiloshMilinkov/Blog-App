@@ -5,11 +5,17 @@
 </template>
 
 <style scoped>
-div{
-    border-radius: 12px;
-    box-shadow: 0 2px 80px rgba(0,0,0,0.26);
-    padding:1rem;
-    margin: 2rem auto;
-    max-width: 40rem;
+div {
+  border-radius: 16px;
+  background-color: var(--color-surface);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  margin: 2rem auto;
+  max-width: 40rem;
+  transition: box-shadow 0.3s;
+}
+
+div:hover {
+  box-shadow: 0 6px 36px rgba(0, 0, 0, 0.15);
 }
 </style>

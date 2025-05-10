@@ -1,5 +1,4 @@
 <template>
-    <h1>All Posts</h1>
     <StoredPosts></StoredPosts>
 </template>
   

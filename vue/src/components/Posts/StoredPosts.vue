@@ -38,10 +38,9 @@ async function deletePost(id) {
 
 <style scoped>
 ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    margin: auto;
-    max-width: 40rem;
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  width: 50%;
 }
 </style>
