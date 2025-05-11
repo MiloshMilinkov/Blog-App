@@ -2,7 +2,6 @@
 
 A modern blogging platform where users can register, authenticate, and manage their own posts. Built with a Node.js/Express/MongoDB backend and a Vue.js/Vite frontend.
 
-
 ---
 
 ## Overview
@@ -38,6 +37,7 @@ This application enables users to:
   - Vue.js 3  
   - Vite  
   - Vue Router  
+  - TailwindCSS
 - **API Testing**  
   - Thunder Client  
 - **Version Control**  
