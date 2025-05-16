@@ -1,5 +1,5 @@
 <template>
-   <BaseButton @click="$router.push({ name: 'CreatePosts'})">Create</BaseButton>
+
     <ul>
         <Post v-for="post in posts"
         :key="post.id" 
@@ -19,7 +19,6 @@
 import { ref, onMounted } from 'vue';
 import api from '../../api/index.js'
 import Post from './Post.vue'
-import BaseButton from '../UI/BaseButton.vue';
 const posts = ref([]);
 
 onMounted(async () => {
