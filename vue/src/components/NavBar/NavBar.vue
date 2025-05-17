@@ -1,6 +1,6 @@
 
 <template>
-  <nav class="bg-white border-b border-gray-200 px-4 py-2 flex items-center justify-between">
+  <nav class="bg-white border-b border-gray-200 px-4 py-2 flex items-center justify-between sticky top-0">
     <div class="flex items-center space-x-4">
       <span class="text-2xl font-bold">Blog Mania</span>
       <div class="relative">
