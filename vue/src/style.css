@@ -9,3 +9,8 @@
   --color-border: #ccc;
   --color-soft-brown: #d8c3a5;
 }
+
+html, body, #app{
+  height: 100%;
+  margin: 0;
+}
