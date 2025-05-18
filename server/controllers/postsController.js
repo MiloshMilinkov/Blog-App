@@ -50,3 +50,17 @@ export const patchPostbyId = async (req, res) => {
   }
   
 }
+
+export const findPostByTitle = async (req, res) => {
+  try{
+    const {title} = req.params;
+    const post = await postService.findPostByTitle(title);
+    if(!post){
+      return res.status(404).json({error: 'Post not found.'})
+    }
+    res.status(200).json(post);
+  }
+  catch(error){
+        res.status(500).json({ error: 'Could not find post.' });
+  }
+}

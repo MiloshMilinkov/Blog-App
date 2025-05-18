@@ -42,3 +42,9 @@ export const deletePostById = async (id) => {
     throw err;
   }
 }
+
+export const findPostByTitle = async (title) => {
+  return await Post.findOne({ title:{$regex:`${title}$`, $options: 'i'}})
+  .populate('author', 'username')
+  .lean();
+}
