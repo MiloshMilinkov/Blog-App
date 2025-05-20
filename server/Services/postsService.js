@@ -48,3 +48,16 @@ export const findPostByTitle = async (title) => {
   .populate('author', 'username')
   .lean();
 }
+
+export const searchPosts = (query) => {
+  const re = new RegExp(query, 'i');
+
+  return Post.find({
+      author: { $exists: true, $ne: null },
+      $or: [
+        { title:  re }
+      ]
+    })
+    .sort('-createdAt')
+    .populate('author', 'username');
+};

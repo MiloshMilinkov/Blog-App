@@ -2,7 +2,10 @@ import * as postService from '../Services/postsService.js'
 
 export const listPosts = async (req, res, next) =>{
   try {
-    const posts = await postService.getAllPosts();
+    const {search} = req.query;
+    const posts = search
+      ? await postService.searchPosts(search)
+      : await postService.getAllPosts();
     res.status(200).json(posts);
   } catch (err) {
     next(err);
