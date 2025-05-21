@@ -1,15 +1,9 @@
 
 <template>
-  <nav class="bg-white border-b border-gray-200 px-4 py-2 flex items-center justify-between sticky top-0">
+  <nav class="bg-white border-b border-gray-200 px-4 py-2 flex items-center justify-between sticky top-0 mb-1.5">
     <div class="flex items-center space-x-4">
       <span class="text-2xl font-bold">Blog Mania</span>
-      <div class="relative">
-        <input
-          type="text"
-          placeholder="Search"
-          class="pl-3 pr-4 py-1.5 w-64 rounded-full bg-gray-100 text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
-      </div>
+
     </div>
 
     <div class="flex items-center space-x-4">
