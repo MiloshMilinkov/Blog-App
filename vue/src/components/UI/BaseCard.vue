@@ -1,21 +1,15 @@
 <template>
-    <div>
-        <slot></slot>
-    </div>
+  <div
+    class="
+      bg-[var(--color-surface)]
+      rounded-2xl
+      shadow-lg hover:shadow-2xl
+      p-8
+      mx-auto my-8
+      max-w-3xl
+      transition-shadow duration-300
+    "
+  >
+    <slot />
+  </div>
 </template>
-
-<style scoped>
-div {
-  border-radius: 16px;
-  background-color: var(--color-surface);
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
-  padding: 2rem;
-  margin: 2rem auto;
-  max-width: 40rem;
-  transition: box-shadow 0.3s;
-}
-
-div:hover {
-  box-shadow: 0 6px 36px rgba(0, 0, 0, 0.15);
-}
-</style>

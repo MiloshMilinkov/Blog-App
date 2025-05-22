@@ -1,39 +1,23 @@
+
 <template>
-    <button>
-        <slot></slot>
-    </button>
+  <button
+    type="button"
+    :class="[
+      'px-6 py-3 text-base font-medium rounded-lg transition-colors duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2',
+      mode === 'flat'
+        ? 'bg-transparent text-[var(--color-accent)] hover:bg-[#f3e8dc] focus:ring-[var(--color-accent)]'
+        : 'bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-dark)] focus:ring-[var(--color-accent-dark)] shadow-sm hover:shadow-md'
+    ]"
+  >
+    <slot />
+  </button>
 </template>
-<script>
-export default {
-    props:['mode']
-}
+
+<script setup>
+const props = defineProps({
+  mode: {
+    type: String,
+    default: 'default', 
+  }
+})
 </script>
-<style scoped>
-button {
-  padding: 0.75rem 1.5rem;
-  font-family: inherit;
-  font-size: 1rem;
-  background-color: var(--color-accent);
-  border: none;
-  border-radius: 8px;
-  color: white;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-button:hover,
-button:active {
-  background-color: var(--color-accent-dark);
-}
-
-.flat {
-  background-color: transparent;
-  color: var(--color-accent);
-  border: none;
-}
-
-.flat:hover,
-.flat:active {
-  background-color: #f3e8dc;
-}
-</style>
