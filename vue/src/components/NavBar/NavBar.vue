@@ -3,14 +3,13 @@
   <nav class="bg-white border-b border-gray-200 px-4 py-2 flex items-center justify-between sticky top-0 mb-1.5">
     <div class="flex items-center space-x-4">
       <span class="text-2xl font-bold">Blog Mania</span>
-
     </div>
 
     <div class="flex items-center space-x-4">
-      <button class="px-3 py-1 rounded hover:bg-gray-100">Explore</button>
-      <button @click="$router.push({ name: 'CreatePosts'})">Create</button>
+      <router-link to="/"><button class="px-3 py-1 rounded hover:bg-gray-100 cursor-pointer">Explore</button></router-link>
+      <router-link to="/posts/create"><button class="px-3 py-1 rounded hover:bg-gray-100 cursor-pointer">Create</button></router-link>
       <div class="relative" @click="toggleMenu">
-        <button class="px-3 py-1 rounded hover:bg-gray-100">
+        <button class="px-3 py-1 rounded hover:bg-gray-100 cursor-pointer">
           User
         </button>
         <transition name="fade">
