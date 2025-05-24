@@ -29,7 +29,7 @@ export async function createPost(req, res) {
     const post = await postService.createPost(req.body)
     res.status(201).json(post);
   } catch (error) {
-    res.status(400).json({error: 'Invalid post data.'})
+    res.status(400).json({error: error + 'Invalid post data.'})
   }
 }
 

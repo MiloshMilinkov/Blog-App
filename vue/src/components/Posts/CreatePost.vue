@@ -5,7 +5,7 @@
         {{ msg }}
       </p>
     </div>
-    <form @submit.prevent="updatePost" class="flex flex-col gap-5">
+    <form @submit.prevent="CreatePost" class="flex flex-col gap-5">
       <header>
         <h2 class="text-3xl text-[--color-text] font-bold">Create a Post</h2>
       </header>
@@ -53,7 +53,24 @@
     body: '',
   });
   
-  
+   async function CreatePost() {
+    errorMessages.value = [];
+    try {
+      await api.post(`/posts`, {
+        title: form.title,
+        body:  form.body,
+        author: '681534029deec520a926bd9d'
+      });
+      router.push({ name: 'Home' });
+    } catch (err) {
+    const data = err.response?.data;
+    if (Array.isArray(data?.errors)) {
+      errorMessages.value = data.errors.map(e => e.msg);
+    } else {
+      errorMessages.value = [data?.error || data?.message || 'Post creation failed.'];
+    }
+  }
+} 
   
 function goBack() {
   router.back(); 
