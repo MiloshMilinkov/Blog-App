@@ -1,10 +1,5 @@
 <template>
   <BaseCard>
-    <div v-if="errorMessages.length" class="mb-4 text-red-600">
-      <p v-for="(msg, i) in errorMessages" :key="i">
-        {{ msg }}
-      </p>
-    </div>
     <form @submit.prevent="CreatePost" class="flex flex-col gap-5">
       <header>
         <h2 class="text-3xl text-[--color-text] font-bold">Create a Post</h2>
@@ -18,7 +13,11 @@
           class="bg-green-100 border-2 border-[--color-border] rounded-lg p-3 text-base transition-colors focus:outline-none"
         />
       </div>
-
+      <div v-if="errorMessages.length" class="mb-4 text-red-600">
+        <p v-for="(msg, i) in errorMessages" :key="i">
+          {{ msg.path === 'title' ? msg.msg : ''}}
+        </p>
+      </div>
       <div class="flex flex-col gap-1.5">
         <label for="body" class="text-[--color-text] font-semibold">Body</label>
         <textarea
@@ -26,7 +25,11 @@
           class="bg-green-100 border-2 border-[--color-border] rounded-lg p-3 text-base transition-colors focus:outline-none"
         />
       </div>
-
+      <div v-if="errorMessages.length" class="mb-4 text-red-600">
+        <p v-for="(msg, i) in errorMessages" :key="i">
+          {{ msg.path === 'body' ? msg.msg : ''}}
+        </p>
+      </div>
       <div class="flex flex-row gap-1.5">
         <BaseButton type="button" @click="goBack">Cancel</BaseButton>
         <BaseButton type="submit">Save Changes</BaseButton>
@@ -65,7 +68,7 @@
     } catch (err) {
     const data = err.response?.data;
     if (Array.isArray(data?.errors)) {
-      errorMessages.value = data.errors.map(e => e.msg);
+      errorMessages.value = data.errors;
     } else {
       errorMessages.value = [data?.error || data?.message || 'Post creation failed.'];
     }
