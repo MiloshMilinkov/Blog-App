@@ -32,6 +32,11 @@
                 Login
               </a>
             </li>
+            <li>
+              <router-link to="/user/register"><a href="#" class="block px-4 py-2 hover:bg-gray-100">
+                Register
+              </a></router-link>
+            </li>
           </ul>
         </transition>
       </div>
