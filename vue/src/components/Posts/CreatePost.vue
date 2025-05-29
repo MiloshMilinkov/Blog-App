@@ -45,6 +45,8 @@
   import BaseCard from '../UI/BaseCard.vue';
   import BaseButton from '../UI/BaseButton.vue';
   import api from '../../api/index.js';
+  import {useToast} from 'vue-toast-notification';
+  import 'vue-toast-notification/dist/theme-sugar.css';
 
   const route  = useRoute();
   const router = useRouter();
@@ -55,7 +57,8 @@
     title: '',
     body: '',
   });
-  
+  const $toast = useToast();
+
    async function CreatePost() {
     errorMessages.value = [];
     try {
@@ -64,6 +67,7 @@
         body:  form.body,
         author: '681534029deec520a926bd9d'
       });
+      $toast.success('You did it!');
       router.push({ name: 'Home' });
     } catch (err) {
     const data = err.response?.data;

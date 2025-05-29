@@ -14,6 +14,7 @@
                 v-model="form.username"
                 placeholder="Your username"
                 class="p-3 bg-green-100 border-2 border-[--color-border] rounded-lg text-base transition-colors focus:outline-none"
+                required
                 />
             </div>
             <div v-if="errorMessages.length" class="mb-4 text-red-600">
@@ -29,6 +30,7 @@
                     v-model="form.email"
                     placeholder="you@example.com"
                     class="p-3 bg-green-100 border-2 border-[--color-border] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+                    required
                 />
             </div>
             <div class="flex flex-col">
@@ -39,6 +41,7 @@
                     v-model="form.password"
                     placeholder="Choose a strong password"
                     class="p-3 bg-green-100 border-2 border-[--color-border] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+                    required
                 />
             </div>
             <div class="flex justify-end space-x-4 pt-4">
