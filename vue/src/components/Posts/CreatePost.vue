@@ -40,22 +40,21 @@
 
   
 <script setup>
-  import { ref, reactive, onMounted  } from 'vue';
-  import { useRoute, useRouter } from 'vue-router';
+  import { ref, reactive} from 'vue';
+  import { useRouter } from 'vue-router';
   import BaseCard from '../UI/BaseCard.vue';
   import BaseButton from '../UI/BaseButton.vue';
   import api from '../../api/index.js';
- import toastNotification from '../../helper/toastNotification.js';
+  import { useNotification } from '../../helper/toastNotification.js';
 
-  const route  = useRoute();
+ 
   const router = useRouter();
-  const post    = ref(null);
-  const isLoaded = ref(false);
   const errorMessages = ref([]);
   const form = reactive({
     title: '',
     body: '',
   });
+  const { notify } = useNotification()
 
    async function CreatePost() {
     errorMessages.value = [];
@@ -65,8 +64,7 @@
         body:  form.body,
         author: '681534029deec520a926bd9d'
       });
-      toastNotification('success', 'Post created successfully.');
-
+      notify('success', 'Post created successfully.')
       router.push({ name: 'Home' });
     } catch (err) {
     const data = err.response?.data;

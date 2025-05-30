@@ -1,18 +1,27 @@
 import {useToast} from 'vue-toast-notification';
 import 'vue-toast-notification/dist/theme-sugar.css';
 
-function toastNotification(state, message) { 
-    const $toast = useToast();
-    switch(state){
-        case 'error':
-            $toast.error(message);
-            break;
-        case 'success':
-            $toast.success(message);
-            break;
-        default:
-            $toast.info(message);
-    }
+const state_map = {
+  success: 'success',
+  error:   'error',
+  info:    'info',
+  warning: 'warning',  
 }
 
-export default toastNotification
+const toast_options = {
+  position:  'top-right',
+  duration:  3000,
+  dismissible: true,
+}
+
+export function useNotification() {
+  const toast = useToast()
+
+  function notify(type, message, overrides = {}) {
+    const method = state_map[type] || state_map.info
+    const config = { ...toast_options, ...overrides }
+    return toast[method](message, config)
+  }
+
+  return { notify }
+}
