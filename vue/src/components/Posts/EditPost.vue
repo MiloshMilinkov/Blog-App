@@ -50,6 +50,7 @@
   import BaseCard from '../UI/BaseCard.vue';
   import BaseButton from '../UI/BaseButton.vue';
   import api from '../../api/index.js';
+  import { useNotification } from '../../helper/toastNotification.js';
 
   const route  = useRoute();
   const router = useRouter();
@@ -60,6 +61,7 @@
     title: '',
     body: '',
   });
+  const { notify } = useNotification()
   
   onMounted(async () => {
     try {
@@ -83,6 +85,7 @@
         title: form.title,
         body:  form.body
       });
+      notify('success', 'Post edited successfully.')
       router.push({ name: 'Home' });
     } catch (err) {
     const data = err.response?.data;
