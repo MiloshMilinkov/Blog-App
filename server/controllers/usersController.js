@@ -8,8 +8,11 @@ export async function registerUser(req, res) {
     
     try {
       const user = await userService.registerUser({ username, email, password });
-
-      return res.status(201).json({ message: 'New user created.', userId: user._id });
+      const token = userService.createTokenForUser(user);
+      res.cookie('token', token, {httpOnly: true,}).status(201).json({
+        message: 'New user created and automatically logged in.',
+        userId: user._id,
+      });
   
     } catch (err) {
       if (err.status) return res.status(err.status).json({ message: err.message });
