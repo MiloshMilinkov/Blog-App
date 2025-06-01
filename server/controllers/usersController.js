@@ -1,4 +1,5 @@
 import * as  userService from '../Services/usersServices.js'
+import User from '../Models/User.js';
 
 
 export async function registerUser(req, res) {
@@ -19,7 +20,7 @@ export async function registerUser(req, res) {
   
       return res.status(500).json({ message: 'Failed user register request.' });
     }
-  }
+}
 
 
 export async function loginUser(req, res) {
@@ -42,4 +43,21 @@ export async function logoutUser(req,res) {
     httpOnly: true,
   }).status(200).json({message: 'Logged out successfully'})
   
+}
+
+export async function getCurrentUser(req, res) {
+  try {
+    const userId = req.user.sub;
+    const user = await User.findById(userId).select('username email')
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' })
+    }
+    return res.status(200).json({
+      userId: user._id.toString(),
+      username: user.username,
+      email: user.email
+    })
+  } catch (error) {
+    return res.status(500).json({ message: 'Failed to get current user.' })
+  }
 }

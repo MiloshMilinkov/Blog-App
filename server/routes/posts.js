@@ -15,8 +15,8 @@ router.get('/', searchRules, validateSearch, postsController.listPosts);
 
 router.get('/:id', postsController.findPostById);
 
-router.post('/', postRules, validatePost, postsController.createPost);
-//router.post('/', authenticate.authenticate, postRules, validatePost, postsController.createPost);
+//router.post('/', postRules, validatePost, postsController.createPost);
+router.post('/', authenticate.authenticate, postRules, validatePost, postsController.createPost);
 
 router.delete('/:id', postsController.deletePostById);
 
