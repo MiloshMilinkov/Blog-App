@@ -12,8 +12,8 @@ export  const authenticate = (req, res, next) => {
       }
     try {
         //Verify the Token with the password stored in ENV variable
-        const user = jwt.verify(token, process.env.MY_SECRET);
-        req.user = user;
+        const payload = jwt.verify(token, process.env.MY_SECRET);
+        req.user = payload;
         next();
     } catch (error) {
         return res.status(401).json({ error: 'Invalid or expired token' });

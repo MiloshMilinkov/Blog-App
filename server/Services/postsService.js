@@ -10,12 +10,12 @@ export  const  getPostById = async (id) => {
    return await Post.findById(id).populate('author', 'username').lean();
 }
 
-export  const  createPost = async (data) => {
-    const {title, body, author} = data;
+export  const  createPost = async (user, data) => {
+    const {title, body} = data;
     return await Post.create({
         title,
         body,
-        author
+        author: user
     })
 }
 

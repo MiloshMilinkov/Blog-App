@@ -26,7 +26,7 @@ export const findPostById = async (req, res, next) =>{
 
 export async function createPost(req, res) {
   try {
-    const post = await postService.createPost(req.body)
+    const post = await postService.createPost(req.user.sub, req.body)
     res.status(201).json(post);
   } catch (error) {
     res.status(400).json({error: error + 'Invalid post data.'})

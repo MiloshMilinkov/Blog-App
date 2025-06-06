@@ -30,6 +30,6 @@ export const  loginUser = async ({ email, password }) => {
 export const createTokenForUser = (user) => {
     // Only include minimal data in the JWT payload:
     //sign a Token that "hashes the whole data set of the user upon login, provides a key that can confirm this token and sets an expiration date."
-    const payload = { sub: user._id.toString(), email: user.email };
+    const payload = { sub: user._id.toString()}
     return jwt.sign(payload, process.env.MY_SECRET, { expiresIn: '15m' });
   }

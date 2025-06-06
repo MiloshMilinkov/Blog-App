@@ -1,6 +1,6 @@
 import * as  userService from '../Services/usersServices.js'
 import User from '../Models/User.js';
-
+import jwt from 'jsonwebtoken'
 
 export async function registerUser(req, res) {
     const { username, email, password } = req.body;
@@ -12,7 +12,7 @@ export async function registerUser(req, res) {
       const token = userService.createTokenForUser(user);
       res.cookie('token', token, {httpOnly: true,}).status(201).json({
         message: 'New user created and automatically logged in.',
-        userId: user._id,
+        userId: user._id.toString(),
       });
   
     } catch (err) {
