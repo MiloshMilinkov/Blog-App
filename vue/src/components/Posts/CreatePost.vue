@@ -1,5 +1,5 @@
 <template>
-  <BaseCard>
+  <BaseCard class="max-w-lg mx-auto mt-16 p-8">
     <form @submit.prevent="CreatePost" class="flex flex-col gap-5">
       <header>
         <h2 class="text-3xl text-[--color-text] font-bold">Create a Post</h2>
@@ -30,9 +30,9 @@
           {{ msg.path === 'body' ? msg.msg : ''}}
         </p>
       </div>
-      <div class="flex flex-row gap-1.5">
+      <div class="flex justify-end space-x-4 pt-4">
         <BaseButton type="button" @click="goBack">Cancel</BaseButton>
-        <BaseButton type="submit">Save Changes</BaseButton>
+        <BaseButton type="submit">Post</BaseButton>
       </div>
     </form>
   </BaseCard>

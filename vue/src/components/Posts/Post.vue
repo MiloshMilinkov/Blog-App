@@ -1,6 +1,6 @@
 <template>
     <li>
-        <BaseCard>
+        <BaseCard class="max-w-xl mx-auto mt-16 p-8">
             <router-link :to="{name: 'PostDetail', params: {id: postId}}" class="link">
                 <header><h3>{{ title }}</h3></header>
                 <p>{{ body }}</p>
@@ -8,7 +8,7 @@
                 <p>Created: {{ dateFormat(createdAt) }}</p>
                 <p>Updated: {{ dateFormat(updatedAt) }}</p>
             </router-link>
-            <div class="btn-container">
+            <div class="flex justify-end space-x-4 pt-4">
               <BaseButton  @click="onDelete(postId)">Delete</BaseButton>
               <BaseButton @click="$router.push({ name: 'EditPost', params: { id: postId } })">Edit</BaseButton>
             </div>
@@ -76,16 +76,5 @@ p {
   background-color: #f8f6f4;
   border-radius: 8px;
   transition: background 0.3s;
-}
-
-.btn-container{
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  gap: 1rem;
-}
-
-.btn-container button{
-  width: 10rem;
 }
 </style>
