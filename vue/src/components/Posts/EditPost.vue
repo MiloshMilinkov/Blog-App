@@ -1,40 +1,42 @@
 <template>
-  <BaseCard v-if="isLoaded">
+  <BaseCard v-if="isLoaded" class="max-w-xl mx-auto mt-16 p-8">
     <div v-if="errorMessages.length" class="mb-4">
       <p v-for="(msg, i) in errorMessages" :key="i">
         {{ msg }}
       </p>
     </div>
-    <form @submit.prevent="updatePost">
+    <form @submit.prevent="updatePost" class="flex flex-col gap-5">
       <header>
-        <h2>Edit Post</h2>
+        <h2 class="text-3xl text-[--color-text] font-bold">Edit Post</h2>
       </header>
-      <div class="title_container">
-        <label for="title">Title</label>
+      <div class="flex flex-col gap-1.5">
+        <label for="title" class="text-[--color-text] font-semibold">Title</label>
         <input
         id="title"
         v-model="form.title"
         type="text"
         required
+        class="border-1 border-[--color-border] p-2 rounded-lg focus:bg-[#eceaea]"
         />
       </div>
 
-      <div class="body_container">
-        <label for="body">Body</label>
+      <div class="flex flex-col gap-5">
+        <label for="body" class="text-[--color-text] font-semibold">Body</label>
         <textarea
         id="body"
         v-model="form.body"
         rows="6"
         required
+        class="border-1 border-[--color-border] p-2 rounded-lg focus:bg-[#eceaea]"
         />
       </div>
 
-      <div class="mb-4">
-        <label>Author</label>
+      <div class="flex flex-col gap-5">
+        <label class="text-[--color-text] font-semibold">Author</label>
         <p>{{ post.author.username }}</p>
       </div>
 
-      <div >
+      <div class="flex justify-end space-x-4 pt-4">
         <BaseButton type="button" @click="goBack">Cancel</BaseButton>
         <BaseButton type="submit">Save Changes</BaseButton>
       </div>
@@ -101,48 +103,3 @@ function goBack() {
   router.back(); 
 }
 </script>
-  
-<style scoped>
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.title_container,
-.body_container,
-.mb-4 {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-input,
-textarea {
-  border: 1px solid var(--color-border);
-  border-radius: 8px;
-  padding: 0.75rem;
-  font-size: 1rem;
-  background-color: var(--color-surface);
-  color: var(--color-text);
-  transition: background-color 0.2s;
-}
-
-input:focus,
-textarea:focus {
-  background-color: #eceaea;
-  outline: none;
-}
-
-label {
-  font-weight: 600;
-  color: var(--color-muted);
-}
-
-form > div:last-child {
-  display: flex;
-  justify-content: flex-end;
-  gap: 1rem;
-}
-</style>
-  
