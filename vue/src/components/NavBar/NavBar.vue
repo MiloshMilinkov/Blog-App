@@ -28,14 +28,10 @@
               </a>
             </li>
             <li>
-              <a href="#" class="block px-4 py-2 hover:bg-gray-100">
-                Login
-              </a>
+              <router-link to="/user/login" class="block px-4 py-2 hover:bg-gray-100">Login</router-link>
             </li>
             <li>
-              <router-link to="/user/register"><a href="#" class="block px-4 py-2 hover:bg-gray-100">
-                Register
-              </a></router-link>
+              <router-link to="/user/register" class="block px-4 py-2 hover:bg-gray-100">Register</router-link>
             </li>
           </ul>
         </transition>

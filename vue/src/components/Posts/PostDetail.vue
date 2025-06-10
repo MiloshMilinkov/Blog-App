@@ -10,9 +10,8 @@
     <div class="flex justify-end space-x-4 pt-4">
       <BaseButton @click="goBack">Back to list</BaseButton>
     </div>
-
   </BaseCard>
-  <p v-else>Loading post detail…</p>
+  <BaseCard v-else><p >Loading post detail…</p></BaseCard>
 </template>
   
 <script setup>

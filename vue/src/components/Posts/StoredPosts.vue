@@ -64,10 +64,5 @@ async function deletePost(id) {
 </script>
 
 <style scoped>
-ul {
-  list-style: none;
-  margin: 0 auto;
-  padding: 0;
-  width: 50%;
-}
+
 </style>
