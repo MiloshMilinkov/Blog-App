@@ -19,7 +19,6 @@
 </template>
   
 <script setup>
-import { defineProps, defineEmits } from 'vue'
 import BaseCard from '../UI/BaseCard.vue'
 import BaseButton from '../UI/BaseButton.vue'
 import dateFormat from '../../helper/dateFormat.js'
