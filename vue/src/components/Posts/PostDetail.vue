@@ -1,11 +1,16 @@
 <template>
-  <BaseCard v-if="post">
-    <header><h2>{{ post.title }}</h2></header>
-    <p>{{ post.body }}</p>
-    <p>Author: {{ post.author.username }}</p>
-    <p>Created: {{ dateFormat(post.createdAt) }}</p>
-    <p>Updated: {{ dateFormat(post.updatedAt) }}</p>
-    <BaseButton @click="goBack">Back to list</BaseButton>
+  <BaseCard v-if="post" class="max-w-3xl mx-auto mt-16 p-8">
+    <header class="border-b pb-1 border-[--color-border]">
+      <h2 class="text-3xl text-[--color-accent-dark] mb-3">{{ post.title }}</h2>
+    </header>
+    <p class="m-1.5 text-[--color-text]">{{ post.body }}</p>
+    <p class="m-1.5 text-[--color-text]">Author: {{ post.author.username }}</p>
+    <p class="m-1.5 text-[--color-text]">Created: {{ dateFormat(post.createdAt) }}</p>
+    <p class="m-1.5  text-[--color-text]">Updated: {{ dateFormat(post.updatedAt) }}</p>
+    <div class="flex justify-end space-x-4 pt-4">
+      <BaseButton @click="goBack">Back to list</BaseButton>
+    </div>
+
   </BaseCard>
   <p v-else>Loading post detail…</p>
 </template>
@@ -34,22 +39,4 @@
   function goBack() {
     router.push({ name: 'Home' });
   }
-  </script>
-  
-<style scoped>
-  h2 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-    color: var(--color-accent);
-  }
-
-  p {
-    font-size: 1rem;
-    margin-bottom: 0.5rem;
-    color: var(--color-text);
-  }
-
-  .BaseButton {
-    margin-top: 1rem;
-  }
-</style>
+</script>
