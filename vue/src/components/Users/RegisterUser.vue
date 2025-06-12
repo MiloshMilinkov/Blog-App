@@ -48,6 +48,9 @@
                 <BaseButton type="button" @click="goBack">Cancel</BaseButton>
                 <BaseButton type="submit">Register</BaseButton>
             </div>
+            <div class="flex justify-end space-x-4 pt-4">
+            <p>Already have an account? <router-link :to="{ name: 'LoginUser' }">Sign in</router-link>!</p>
+            </div>
         </form>
     </BaseCard>
 </template>
@@ -58,6 +61,7 @@ import { useRouter } from 'vue-router';
 import BaseCard from '../UI/BaseCard.vue';
 import BaseButton from '../UI/BaseButton.vue';
 import api from '../../api/index.js';
+ import { useNotification } from '../../helper/toastNotification.js';
 
 const router = useRouter();
 const errorMessages = ref([]);
@@ -66,6 +70,8 @@ const form = reactive({
   email: '',
   password: ''
 });
+const userId = ref(null)
+const { notify } = useNotification()
 
 async function RegisterUser() {
   errorMessages.value = [];
@@ -75,7 +81,9 @@ async function RegisterUser() {
       email: form.email,
       password: form.password
     });
-    router.push({ name: 'Home' });
+    userId.value = response.data.userId
+    notify('success', 'You have registered successfully.')
+    router.push({ name: 'Home', params: { id: userId.value } })
   } catch (err) {
     const data = err.response?.data;
     if (Array.isArray(data?.errors)) {
