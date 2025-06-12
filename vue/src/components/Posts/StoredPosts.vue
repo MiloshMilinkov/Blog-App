@@ -62,7 +62,3 @@ async function deletePost(id) {
   }
 }
 </script>
-
-<style scoped>
-
-</style>
