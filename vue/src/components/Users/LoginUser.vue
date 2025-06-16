@@ -1,6 +1,6 @@
 <template>
     <BaseCard class="max-w-md mx-auto mt-16 p-8">
-        <form @submit.prevent="RegisterUser" class="flex flex-col gap-6">
+        <form  @submit.prevent="LoginUser" class="flex flex-col gap-6">
             <header>
                 <h2 class="text-3xl font-bold text-center text-[--color-text] ">Login</h2>
             </header>
@@ -47,15 +47,41 @@
 
 <script setup>
 import { ref, reactive } from 'vue';
+import { useRouter } from 'vue-router';
 import BaseCard from '../UI/BaseCard.vue';
 import BaseButton from '../UI/BaseButton.vue';
-import { useRouter } from 'vue-router';
- const router = useRouter();
+import api from '../../api/index.js';
+import { useNotification } from '../../helper/toastNotification.js';
+
+const router = useRouter();
 const errorMessages = ref([]);
 const form = reactive({
   email: '',
   password: ''
 });
+const userId = ref(null)
+const { notify } = useNotification()
+
+async function LoginUser() {
+  errorMessages.value = [];
+  try {
+const response = await api.post(`/users/login`, {
+  email: form.email,
+  password: form.password
+});
+userId.value = response.data.userId;
+notify('success', 'You have logged in successfully.');
+router.push({ name: 'Home', params: { id: userId.value } });
+  } catch (err) {
+    const data = err.response?.data;
+    if (Array.isArray(data?.errors)) {
+      errorMessages.value = data.errors;
+    } else {
+      errorMessages.value = [data?.error || data?.message || 'User login failed.'];
+    }
+  }
+}
+
 function goBack() {
   router.back(); 
 }

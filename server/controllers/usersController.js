@@ -31,7 +31,7 @@ export async function loginUser(req, res) {
         const user = await userService.loginUser({ email, password });
         const token = userService.createTokenForUser(user);
 
-        res.cookie("token", token,{ httpOnly: true}).status(200).json({message: "Logged In."})
+        res.cookie("token", token,{ httpOnly: true}).status(200).json({message: "Logged In.", userId: user._id.toString(),})
     } catch (error) {
         res.status(500).json({message: 'Failed user login request.' + error})
     }

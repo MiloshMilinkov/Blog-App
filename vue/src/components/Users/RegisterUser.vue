@@ -61,7 +61,7 @@ import { useRouter } from 'vue-router';
 import BaseCard from '../UI/BaseCard.vue';
 import BaseButton from '../UI/BaseButton.vue';
 import api from '../../api/index.js';
- import { useNotification } from '../../helper/toastNotification.js';
+import { useNotification } from '../../helper/toastNotification.js';
 
 const router = useRouter();
 const errorMessages = ref([]);
@@ -76,7 +76,7 @@ const { notify } = useNotification()
 async function RegisterUser() {
   errorMessages.value = [];
   try {
-    await api.post(`/users/register`, {
+    const response = await api.post(`/users/register`, {
       username: form.username,
       email: form.email,
       password: form.password
