@@ -4,9 +4,11 @@
             <header>
                 <h2 class="text-3xl font-bold text-center text-[--color-text] ">Register</h2>
             </header>
+
             <div v-if="errorMessages.length" class="text-red-600 space-y-2">
-                <p v-for="(msg, i) in errorMessages" :key="i">{{ msg.msg }}</p>
+              <p v-for="(msg, i) in errorMessages" :key="i">{{ msg.msg }}</p>
             </div>
+
             <div class="flex flex-col">
                 <label for="title" class="mb-2 font-semibold text-[--color-text]">Username</label>
                 <input
@@ -76,21 +78,18 @@ const { notify } = useNotification()
 async function RegisterUser() {
   errorMessages.value = [];
   try {
-    const response = await api.post(`/users/register`, {
+    const { data } = await api.post(`/users/register`, {
       username: form.username,
       email: form.email,
       password: form.password
     });
-    userId.value = response.data.userId
     notify('success', 'You have registered successfully.')
-    router.push({ name: 'Home', params: { id: userId.value } })
+    router.push({ name: 'Home', params: { id: data.userId } })
   } catch (err) {
     const data = err.response?.data;
-    if (Array.isArray(data?.errors)) {
-      errorMessages.value = data.errors;
-    } else {
-      errorMessages.value = [data?.error || data?.message || 'User registration failed.'];
-    }
+    errorMessages.value = Array.isArray(data?.errors)
+      ? data.errors
+      : [{ msg: data?.error || data?.message || 'User registration failed.' }];
   }
 }
 
