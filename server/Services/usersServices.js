@@ -24,9 +24,8 @@ export const  loginUser = async ({ email, password }) => {
       throw err;
     }
     return user;
-  }
+}
 
-//Never worked with JWT so will add comment for future self
 export const createTokenForUser = (user) => {
     // Only include minimal data in the JWT payload:
     //sign a Token that "hashes the whole data set of the user upon login, provides a key that can confirm this token and sets an expiration date."
